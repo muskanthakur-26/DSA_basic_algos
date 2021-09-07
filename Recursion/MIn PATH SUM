@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+typedef long long ll ;
+#define int ll 
+using namespace std ;
+int n;
+int m;
+int a[100][100];
+int mxc(int r, int c)
+{
+    if(r==n && c==m)
+    {
+        return a[n][m];
+    }
+    else if(r==n)
+    {
+        int cost=a[r][c]+mxc(r,c+1);
+        return cost;
+    }
+    else if(c==m)
+    {
+        int cost=a[r][c]+mxc(r+1,c);
+        return cost;
+    }
+    else
+    {
+        int cost=a[r][c]+max(mxc(r,c+1),mxc(r+1,c));
+        return cost;
+    }
+}
+signed main( )
+{
+        cin >> n>>m ;
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                cin>>a[i][j];
+            }
+        }
+        cout <<mxc(1,1)<<endl ;
+    return 0 ;
+} 
