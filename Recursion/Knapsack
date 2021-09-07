@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define int ll
+#define rep(i,a,n) for(int i=a;i<n;i++)
+#define per(i,a,n) for(int i=n-1;i>=a;i--)
+#define pb push_back
+int n,w;
+int ans=INT_MIN;
+int func(int weight[],int val[],int s,int m,int p)
+{
+    if(p==n)
+    {
+        if(m<=w)
+        {
+            ans=max(ans,s);
+        }
+        return ans;
+    }
+    func(weight,val,s, m,p+1);
+    func(weight,val, s+val[p],m+weight[p], p+1);
+    return ans;
+}
+signed main()
+{
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    cin>>n>>w;
+    int weight[n];
+    int val[n];
+    rep(i,0,n)
+    {
+        cin>>weight[i]>>val[i];
+    }
+    cout<<func(weight,val,0,0,0);
+}
